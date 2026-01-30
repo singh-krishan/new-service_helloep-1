@@ -1,0 +1,6 @@
+apiVersion: v2
+name: new-service_helloep-1
+description: A Python microservice
+type: application
+version: 0.1.0
+appVersion: "0.1.0"
