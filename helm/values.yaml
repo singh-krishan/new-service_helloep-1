@@ -1,0 +1,35 @@
+replicaCount: 1
+
+image:
+  repository: ghcr.io/singh-krishan/new-service_helloep-1
+  pullPolicy: Always
+  tag: "latest"
+
+service:
+  type: ClusterIP
+  port: 80
+  targetPort: 8002
+
+resources:
+  limits:
+    cpu: 500m
+    memory: 512Mi
+  requests:
+    cpu: 250m
+    memory: 256Mi
+
+autoscaling:
+  enabled: false
+  minReplicas: 1
+  maxReplicas: 3
+  targetCPUUtilizationPercentage: 80
+
+env:
+  - name: PORT
+    value: "8002"
+
+# Dynatrace monitoring annotations
+podAnnotations:
+  prometheus.io/scrape: "true"
+  prometheus.io/port: "8002"
+  prometheus.io/path: "/metrics"
